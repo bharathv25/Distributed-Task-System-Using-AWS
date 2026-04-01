@@ -1,7 +1,3 @@
-Perfect! Let’s give your README a professional, visually appealing GitHub look with badges, code highlighting, and clean sectioning. Here’s the enhanced version:
-
-
----
 
 Distributed-Task-System-Using-AWS
    
@@ -20,13 +16,13 @@ Frontend (HTML/JS) → Flask API → Amazon SQS → EC2 Workers → Auto Scaling
 
 ⚙️ Features
 
-🌐 Web-based dashboard to send tasks
-📬 Amazon SQS for decoupled messaging
-⚙️ Background worker processing system
-📈 Auto Scaling based on queue load
-🔁 Retry mechanism with failure handling (DLQ)
-📊 Real-time queue monitoring
-🚀 Fully deployed on AWS EC2  
+🌐 Web-based dashboard to send tasks  
+📬 Amazon SQS for decoupled messaging   
+⚙️ Background worker processing system  
+📈 Auto Scaling based on queue load  
+🔁 Retry mechanism with failure handling (DLQ)  
+📊 Real-time queue monitoring  
+🚀 Fully deployed on AWS EC2   
 
 
 🧠 How It Works
@@ -42,30 +38,28 @@ Frontend (HTML/JS) → Flask API → Amazon SQS → EC2 Workers → Auto Scaling
 
 🛠️ Tech Stack
 
-AWS: EC2, SQS, Auto Scaling, CloudWatch
-Python: Flask, Boto3
-Frontend: HTML, CSS, JavaScript  
+AWS: EC2, SQS, Auto Scaling, CloudWatch  
+Python: Flask, Boto3  
+Frontend: HTML, CSS, JavaScript    
 
 
 📂 Project Structure
 
-app.py        → API server
-worker.py     → Background worker
-index.html    → Frontend UI
-send.py       → Load testing script
-start.sh      → Startup script
-
+app.py        → API server  
+worker.py     → Background worker  
+index.html    → Frontend UI  
+send.py       → Load testing script  
+start.sh      → Startup script  
 
 🏆 Key Learnings
 
-Distributed system design
-Queue-based architecture
-Auto scaling in cloud
-Asynchronous processing
-Debugging real-world systems
-
+Distributed system design  
+Queue-based architecture  
+Auto scaling in cloud  
+Asynchronous processing  
+Debugging real-world systems  
 
 👨‍💻 Author
-
+Bharath Vishnu B
 Bharath Vishnu B
 
