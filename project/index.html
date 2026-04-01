@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Task Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle at top, #1e293b, #020617);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            font-size: 40px;
+        }
+
+        .container {
+            margin-top: 40px;
+        }
+
+        .card {
+            display: inline-block;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            min-width: 220px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+
+        #count { color: #22c55e; }
+        #queue { color: #38bdf8; }
+
+        button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #22c55e, #4ade80);
+            color: black;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #22c55e;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .spinner {
+            margin: 10px auto;
+            width: 25px;
+            height: 25px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top: 3px solid #22c55e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+
+<h1> Distributed Task Dashboard</h1>
+
+<button onclick="sendTask()">Send Task </button>
+
+<div class="spinner" id="loader"></div>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Tasks Sent</h2>
+        <div id="count" class="value">0</div>
+    </div>
+
+    <div class="card">
+        <h2>Queue Size</h2>
+        <div id="queue" class="value">0</div>
+    </div>
+
+</div>
+
+<p id="status"></p>
+
+<script>
+
+let count = 0;
+const API = "http://13.203.217.30:5000";
+
+async function sendTask() {
+    const loader = document.getElementById("loader");
+    loader.style.display = "block";
+
+    try {
+        const res = await fetch(`${API}/send`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({message: " Task from UI"})
+        });
+
+        const data = await res.json();
+        console.log("Response:", data);
+
+        if (res.ok) {
+            count++;
+            document.getElementById("count").innerText = count;
+            document.getElementById("status").innerText = " Task sent successfully!";
+        } else {
+            document.getElementById("status").innerText = " Failed: " + data.error;
+        }
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = " Network error";
+    }
+
+    loader.style.display = "none";
+}
+
+// 🔄 Live queue update
+async function updateQueue() {
+    try {
+        const res = await fetch(`${API}/queue`);
+        const data = await res.json();
+        document.getElementById("queue").innerText = data.queue_size;
+    } catch {}
+}
+
+// refresh every 3 sec
+setInterval(updateQueue, 3000);
+
+</script>
+
+</body>
+</html>
