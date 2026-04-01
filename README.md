@@ -61,5 +61,4 @@ Debugging real-world systems
 
 👨‍💻 Author
 Bharath Vishnu B
-Bharath Vishnu B
 
